@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자기소개 | 홍길동</title>
+<meta name="description" content="안녕하세요! 저를 소개합니다.">
+<style>
+  :root {
+    --bg: #f7f8fc;
+    --card: #ffffff;
+    --text: #1f2430;
+    --muted: #667085;
+    --accent: #5b6cff;
+    --accent-2: #8a5bff;
+    --border: #e6e8f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117;
+      --card: #181b24;
+      --text: #eceef5;
+      --muted: #9aa2b5;
+      --border: #272b38;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; justify-content: center; gap: 24px;
+    padding: 14px 16px;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+  }
+  nav a { color: var(--muted); transition: color .2s; }
+  nav a:hover { color: var(--accent); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  header.hero {
+    text-align: center;
+    padding: 90px 20px 70px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+  }
+  .avatar {
+    width: 128px; height: 128px; border-radius: 50%;
+    margin: 0 auto 24px;
+    display: grid; place-items: center;
+    font-size: 56px;
+    background: rgba(255,255,255,.2);
+    border: 4px solid rgba(255,255,255,.6);
+  }
+  .hero h1 { font-size: clamp(28px, 6vw, 44px); line-height: 1.3; }
+  .hero p { margin-top: 12px; font-size: clamp(16px, 3vw, 20px); opacity: .92; }
+  .btn {
+    display: inline-block; margin-top: 28px;
+    padding: 12px 28px; border-radius: 999px;
+    background: #fff; color: var(--accent); font-weight: 700;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+
+  section { padding: 64px 0 8px; }
+  section h2 {
+    font-size: 26px; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  section h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+  }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+  dl.info { display: grid; grid-template-columns: 90px 1fr; gap: 10px 12px; margin-top: 16px; }
+  dl.info dt { color: var(--muted); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 6px 14px; border-radius: 999px; font-size: 14px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent); font-weight: 600;
+  }
+
+  .bar { margin-bottom: 16px; }
+  .bar-top { display: flex; justify-content: space-between; font-size: 15px; margin-bottom: 6px; }
+  .track { height: 10px; border-radius: 99px; background: var(--border); overflow: hidden; }
+  .fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    width: 0; transition: width 1.1s ease;
+  }
+
+  .timeline { border-left: 2px solid var(--border); padding-left: 22px; }
+  .item { position: relative; margin-bottom: 22px; }
+  .item::before {
+    content: ""; position: absolute; left: -29px; top: 8px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 3px solid var(--bg);
+  }
+  .item .when { font-size: 13px; color: var(--muted); }
+  .item h3 { font-size: 17px; }
+
+  .project h3 { margin-bottom: 6px; }
+  .project p { color: var(--muted); font-size: 15px; }
+
+  .contact a.row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .contact a.row:last-child { border-bottom: 0; }
+  .contact a.row:hover { color: var(--accent); }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 56px 20px 40px; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
+  .reveal.show { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .fill { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#about">소개</a>
+  <a href="#skills">기술</a>
+  <a href="#career">경력</a>
+  <a href="#projects">프로젝트</a>
+  <a href="#contact">연락처</a>
+</nav>
+
+<header class="hero">
+  <div class="avatar" aria-hidden="true">👋</div>
+  <h1>안녕하세요, 저는 <span id="name">홍길동</span>입니다</h1>
+  <p>사람을 이해하고, 문제를 즐겁게 해결하는 개발자</p>
+  <a class="btn" href="#contact">연락하기</a>
+</header>
+
+<main class="wrap">
+
+  <section id="about" class="reveal">
+    <h2>👤 About Me</h2>
+    <div class="card">
+      <p>
+        새로운 것을 배우고 만드는 일을 좋아합니다. 복잡한 문제를 단순하게 풀어내고,
+        함께 일하는 사람들과 소통하며 더 나은 결과를 만드는 데 보람을 느낍니다.
+        이 자리에 여러분께 전하고 싶은 저의 이야기를 자유롭게 적어보세요.
+      </p>
+      <dl class="info">
+        <dt>이름</dt><dd>홍길동</dd>
+        <dt>지역</dt><dd>대한민국 서울</dd>
+        <dt>관심사</dt><dd>웹 개발, 독서, 여행, 커피</dd>
+        <dt>MBTI</dt><dd>ENFP</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <h2>🛠 Skills</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="bar"><div class="bar-top"><span>HTML / CSS</span><span>90%</span></div><div class="track"><div class="fill" data-w="90"></div></div></div>
+        <div class="bar"><div class="bar-top"><span>JavaScript</span><span>80%</span></div><div class="track"><div class="fill" data-w="80"></div></div></div>
+        <div class="bar"><div class="bar-top"><span>Python</span><span>70%</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
+      </div>
+      <div class="card">
+        <p style="margin-bottom:12px;color:var(--muted)">그 외 다루는 것들</p>
+        <div class="tags">
+          <span class="tag">Git</span><span class="tag">React</span><span class="tag">Node.js</span>
+          <span class="tag">SQL</span><span class="tag">Figma</span><span class="tag">협업</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="career" class="reveal">
+    <h2>📅 Career &amp; Education</h2>
+    <div class="timeline">
+      <div class="item"><div class="when">2024 – 현재</div><h3>회사 / 소속 이름</h3><p>담당 역할과 주요 성과를 적어보세요.</p></div>
+      <div class="item"><div class="when">2022 – 2024</div><h3>이전 회사 / 활동</h3><p>맡았던 업무와 배운 점을 적어보세요.</p></div>
+      <div class="item"><div class="when">2018 – 2022</div><h3>○○대학교 졸업</h3><p>전공 및 주요 활동을 적어보세요.</p></div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <h2>🚀 Projects</h2>
+    <div class="grid">
+      <a class="card project" href="#"><h3>프로젝트 하나</h3><p>어떤 문제를 어떻게 해결했는지 한두 줄로 설명하세요.</p></a>
+      <a class="card project" href="#"><h3>프로젝트 둘</h3><p>사용한 기술과 결과를 간단히 소개하세요.</p></a>
+      <a class="card project" href="#"><h3>프로젝트 셋</h3><p>링크를 걸어 더 자세한 내용을 보여주세요.</p></a>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>✉️ Contact</h2>
+    <div class="card contact">
+      <a class="row" href="mailto:dltee111@gmail.com"><span>📧</span><span>dltee111@gmail.com</span></a>
+      <a class="row" href="https://github.com/dltee111-glitch"><span>🐙</span><span>github.com/dltee111-glitch</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer>© <span id="year"></span> 홍길동. 방문해 주셔서 감사합니다 😊</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('show');
+      e.target.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
